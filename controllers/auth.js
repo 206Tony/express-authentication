@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../model');
+const db = require('../models');
 
 router.get('/signup', function(req, res) {
   res.render('auth/signup');
