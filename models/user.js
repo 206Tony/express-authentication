@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: {
           args: [1, 99],
-          msg: 'Name must be between 1 and 99 characters'
+          msg: 'Name must be between 1 and 99 characters'   // shows up in flash alert
         }
       }
     },
@@ -25,12 +25,12 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: {
           args: [8, 99],
-          msg: 'Password must be between 8 and 99 characters'
+          msg: 'Password must be between 8 and 99 characters'  //shows up in flash alert
         }
       }
     }
   }, {
-    hooks: {
+    hooks: {  // life-cycle hook - similate to eventHandlers
       beforeCreate: function(pendingUser, options) {
         if (pendingUser && pendingUser.password) {
           var hash = bcrypt.hashSync(pendingUser.password, 12);
