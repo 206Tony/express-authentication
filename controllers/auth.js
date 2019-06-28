@@ -47,14 +47,14 @@ router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/auth/login',
   successFlash: 'You have logged in!',
-  failureFalsh: 'Invalid username and/or password!'
+  failureFlash: 'Invalid username and/or password!'
 })); 
 
 router.get('/logout', function(req, res) {
   req.logout();
   // Flash
   //console.log('logged out');
-  req.flash('success', 'You have logged out?')
+  req.flash('success', 'You have logged out?');
   res.redirect('/');
 });
 

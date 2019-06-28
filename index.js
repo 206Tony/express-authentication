@@ -7,6 +7,7 @@ const session = require('express-session');
 const passport = require('./config/passportConfig');
 //modules for flash messages
 const flash = require('connect-flash');
+const isLoggedIn = require('./middleware/isLoggedIn');
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -33,16 +34,16 @@ app.use(passport.session());
 
 app.use(function(req, res, next) {
   // before every route, attach the flash messages and current user to res.locals
-  res.locals.alerts = req.flash(),
-  req.locals.currentUser = req.user;
+  res.locals.alerts = req.flash();
+  res.locals.currentUser = req.user;
   next();
-})
+});
 
 app.get('/', function(req, res) {
   res.render('index');
 });
 
-app.get('/profile', function(req, res) {
+app.get('/profile', isLoggedIn, function(req, res) {
   res.render('profile');
 });
 
